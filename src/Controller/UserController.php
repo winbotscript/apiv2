@@ -60,7 +60,25 @@ class UserController extends Controller {
     }
 
     public function Login() { //$_POST["email"] $_POST["password"]
-
+        if(empty($_POST["email"]))
+            $datas["email"] = "No email specified";
+        if(empty($_POST["password"]))
+            $datas["password"] = "No password specified";
+        if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))
+            $datas["email_valid"] = "Email address not valid";
+        if(!empty($datas))
+            return json_encode($datas);
+        $r = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $r->execute(["email" => $_POST["email"]]);
+        $r = $r->fetch(\PDO::FETCH_ASSOC);
+        $password = $this->decrypt($r["password"]);
+        if($password == $_POST["password"]) {
+            $datas = ["success" => ["message" => "You are now connected", "detail" => ["Token" => $r["api_token"]]]];
+            return json_encode($datas);
+        } else {
+            $datas = ["errors" => ["message" => "Password incorrect"]];
+            return json_encode($datas);
+        }
     }
 
     public function Validate($token) {

@@ -38,10 +38,24 @@ class Controller {
     }
 
     protected function getUInfo() {
-        if(!isset($_SERVER["HTTP_X_API_KEY"])){
+        if(!isset($_SERVER["HTTP_X_AUTH_KEY"])){
             $datas = ["errors" => ["message" => "Unspecified API Token", "code" => 400 ]];
             return json_encode($datas);
         }
+        $r = $this->db->prepare("SELECT `users`.`id`, `users`.`email`, `users`.`firstname`,`users`.`lastname`,`users`.`address1`,`users`.`address2`,`users`.`zip`,`users`.`city`,`users`.`country`,`users`.`level`, `plans`.`name` AS 'plan name', `plans`.`price` FROM `users` INNER JOIN `plans` ON `plans`.`id`=`users`.`subscription`  WHERE api_token = :api");
+        $r->execute(["api" => $_SERVER["HTTP_X_AUTH_KEY"]]);
+        return json_encode($r->fetch(\PDO::FETCH_ASSOC));
+    }
 
+    protected function _getUInfo($column) {
+        if(!isset($_SERVER["HTTP_X_AUTH_KEY"])){
+            $datas = ["errors" => ["message" => "Unspecified API Token", "code" => 400 ]];
+            return json_encode($datas);
+        }
+        $r = $this->db->prepare("SELECT :col FROM users WHERE api_token = :api");
+        $r->execute(["col" => $column,
+            "api" => $_SERVER["HTTP_X_AUTH_KEY"]]
+        );
+        return $r->fetchColumn(0);
     }
 }

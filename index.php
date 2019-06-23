@@ -16,7 +16,7 @@ header("Content-type: Application/Json");
 
 $router->get    ('/', "Home#welcome" ); //Say hello
 
-$router->get    ('/user', "User#GetInfo"); //Return user informations //TODO
+$router->get    ('/user', "User#GetInfo"); //Return user informations [DONE]
 $router->post   ('/user/register', "User#Register"); //Register an user return true or false with error array //TODO:sendemail
 $router->post   ('/user/login', "User#Login"); //Login user return API Token //TODO
 $router->get    ('/user/validate/:code', "User#Validate"); // Validate user email //TODO
