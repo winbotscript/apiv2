@@ -18,13 +18,13 @@ $router->get    ('/', "Home#welcome" ); //Say hello
 
 $router->get    ('/user', "User#GetInfo"); //Return user informations [DONE]
 $router->post   ('/user/register', "User#Register"); //Register an user return true or false with error array //TODO:sendemail
-$router->post   ('/user/login', "User#Login"); //Login user return API Token //TODO
-$router->get    ('/user/validate/:code', "User#Validate"); // Validate user email //TODO
+$router->post   ('/user/login', "User#Login"); //Login user return API Token [DONE]
+$router->get    ('/user/validate/:code', "User#Validate"); // Validate user email [DONE]
 $router->post   ('/user/reset', "User#Reset"); //Reset Password and API Token //TODO
 
-$router->get    ('/subscription', "Subscription#GetPlans"); //Return all available plans //TODO
-$router->post   ('/subscription/subscribe/:id', "Subscription#Subscribe"); //Subscribe user with SEPA $_POST["IBAN"] //TODO
-$router->delete ('/subscription', "Subscription#Unsubscribe"); //Unsubscribe user //TODO
+$router->get    ('/subscription', "Subscription#GetPlans"); //Return all available plans [DONE]
+$router->post   ('/subscription/subscribe/:id', "Subscription#Subscribe"); //Subscribe user with SEPA $_POST["IBAN"] [DONE]
+$router->delete ('/subscription', "Subscription#Unsubscribe"); //Unsubscribe user [DONE]
 
 $router->get    ('/product/info/:barcode', "Product#GetInfo"); //Get informations on a product //TODO
 

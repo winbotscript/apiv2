@@ -9,6 +9,7 @@ class Controller {
 
     public function __construct($container)
     {
+        //TODO: Check URI + API TOKEN
         $this->container = $container;
         $this->db = new \PDO('mysql:host='.getenv("MYSQL_HOST").';dbname='.getenv("MYSQL_DATABASE"), getenv("MYSQL_USER"), getenv("MYSQL_PASSWORD"));
     }
@@ -52,10 +53,11 @@ class Controller {
             $datas = ["errors" => ["message" => "Unspecified API Token", "code" => 400 ]];
             return json_encode($datas);
         }
-        $r = $this->db->prepare("SELECT :col FROM users WHERE api_token = :api");
-        $r->execute(["col" => $column,
+        $r = $this->db->prepare("SELECT * FROM users WHERE api_token = :api");
+        $r->execute([
             "api" => $_SERVER["HTTP_X_AUTH_KEY"]]
         );
-        return $r->fetchColumn(0);
+        $r = $r->fetch(\PDO::FETCH_ASSOC);
+        return $r[$column];
     }
 }
