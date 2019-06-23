@@ -2,7 +2,9 @@
     "name": "seemyping/router",
     "require": {
         "twig/twig": "^2.6",
-        "ext-PDO": "^7.3"
+        "ext-PDO": "^7.3",
+        "globalcitizen/php-iban": "^2.6",
+        "openfoodfacts/openfoodfacts-php": "^0.1.1"
     },
     "autoload": {
         "psr-4": {

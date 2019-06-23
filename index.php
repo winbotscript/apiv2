@@ -26,7 +26,7 @@ $router->get    ('/subscription', "Subscription#GetPlans"); //Return all availab
 $router->post   ('/subscription/subscribe/:id', "Subscription#Subscribe"); //Subscribe user with SEPA $_POST["IBAN"] [DONE]
 $router->delete ('/subscription', "Subscription#Unsubscribe"); //Unsubscribe user [DONE]
 
-$router->get    ('/product/info/:barcode', "Product#GetInfo"); //Get informations on a product //TODO
+$router->get    ('/product/info/:barcode', "Product#GetInfo"); //Get informations on a product [DONE]
 
 $router->get    ('/stock', "Stock#GetStock"); //Return all Stock and informations //TODO
 $router->put    ('/stock', "Stock#AddItem"); //Add Item and infos //TODO
