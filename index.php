@@ -18,7 +18,7 @@ $router->get    ('/', "Home#welcome" ); //Say hello
 
 $router->get    ('/user', "User#GetInfo"); //Return user informations [DONE]
 $router->post   ('/user/register', "User#Register"); //Register an user return true or false with error array //TODO:sendemail
-$router->post   ('/user/login', "User#Login"); //Login user return API Token [DONE]
+$router->post   ('/user/login', "User#Login"); //Login user return API Token [DONE] //TODO:Update log_date
 $router->get    ('/user/validate/:code', "User#Validate"); // Validate user email [DONE]
 $router->post   ('/user/reset', "User#Reset"); //Reset Password and API Token //TODO
 
@@ -28,7 +28,7 @@ $router->delete ('/subscription', "Subscription#Unsubscribe"); //Unsubscribe use
 
 $router->get    ('/product/info/:barcode', "Product#GetInfo"); //Get informations on a product [DONE]
 
-$router->get    ('/stock', "Stock#GetStock"); //Return all Stock and informations //TODO
+$router->get    ('/stock', "Stock#GetStock"); //Return all Stock and informations [DONE]
 $router->put    ('/stock', "Stock#AddItem"); //Add Item and infos //TODO
 $router->post   ('/stock/:id', "Stock#EditItem"); //Edit item's informations //TODO
 $router->delete ('/stock/:id', "Stock#RemoveItem"); //Remove item from stock //TODO
